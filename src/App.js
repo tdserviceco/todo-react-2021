@@ -1,37 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
-import { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+
+import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
+import NoMatch from './pages/NoMatch';
+import CreateList from './pages/CreateList';
+import ListContent from './pages/ListContent';
+
 
 function App() {
-
-  const testMethod = async () => {
-    return await axios.get('https://todo2021-db.herokuapp.com/get/todo-list');
-  }
-
-  useState(() => {
-    testMethod().then(res => {
-      console.log("result:", res)
-    })
-  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <main>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/list/:id/:title" component={ListContent} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/dashboard/create/list" component={CreateList} />
+          <Route exact path="/dashboard/create/list/step2" component={CreateList} />
+          <Route component={NoMatch} />
+        </Switch>
+      </Router>
+    </main>
+  )
 }
 
 export default App;
