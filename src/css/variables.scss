@@ -1,0 +1,13 @@
+@function returnCalc($number, $differenceNumber) {
+  $value: calc(#{$number} - #{$differenceNumber});
+  @return $value;
+}
+
+@mixin demo {
+  color: yellow;
+  font-size: 2rem;
+}
+
+@mixin name {
+  // like button setup or other "ready-to-use" stuff
+}
