@@ -1,22 +1,25 @@
-import React, {useEffect} from 'react';
-import Img from './img/logo.png';
-import DemoComp from './components/DemoComp'; // Demo purpose only
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
-  const env = process.env.NODE_ENV;
-  useEffect(() => {
-    document.title = "Demo page"
- }, []);
-
   return (
-    <main>
-      <h1>Helloworld</h1>
-      <p>Demo text from ReactJS</p>
-      <em>Your using: {env}</em>
-      <img src={Img} alt="reactJS" />
-      <DemoComp text="Comp" />
-    </main>
-  )
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
 export default App;
