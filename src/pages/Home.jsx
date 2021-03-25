@@ -5,7 +5,7 @@ import Lists from '../components/Lists';
 function Home(props) {
 
   const getList = async () => {
-    return await Axios.get('http://localhost:8080/get/todo-list');
+    return await Axios.get('https://todo2021-db.herokuapp.com/get/todo-list');
   }
 
   const [lists, updateLists] = useState([]);

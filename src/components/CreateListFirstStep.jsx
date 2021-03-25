@@ -9,7 +9,7 @@ function CreateListFirstStep(props) {
     let data = {
       'name': title,
     }
-    axios.post('http://localhost:8080/create/list', data).then(res => {
+    axios.post('https://todo2021-db.herokuapp.com/create/list', data).then(res => {
       alert('Done')
       history.push(`/dashboard/create/list/step2?id=${res.data.insertId}`)
     }).catch(error => console.error(error))

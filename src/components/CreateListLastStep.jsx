@@ -80,7 +80,7 @@ function CreateListLastStep(props) {
         items
       }
     }
-    axios.post('http://localhost:8080/create/items', data).then(res => {
+    axios.post('https://todo2021-db.herokuapp.com/create/items', data).then(res => {
       alert(`List saved!`)
     }).catch(error => console.error(error));
     updateItems([{ item: '' }])
@@ -97,7 +97,7 @@ function CreateListLastStep(props) {
     else {
       updateDisabledButton(false)
     }
-    return await axios.get('http://localhost:8080/get/list/' + lastestID).then(res => {
+    return await axios.get('https://todo2021-db.herokuapp.com/get/list/' + lastestID).then(res => {
       updateName(res.data[0].name)
     }).catch(error => console.error(error));;
   }, [items])
