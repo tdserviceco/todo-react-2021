@@ -10,11 +10,12 @@ function DisplayList(props) {
 
   const { id } = useParams();
   const fetchList = async () => {
-    return await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
+    setTimeout(() => await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
       console.log(res.data)
       updateTitle(res.data[0].name);
       updateItems(JSON.parse(res.data[0].items));
     })
+      , 100)
   }
   useEffect(() => {
     fetchList()
