@@ -9,12 +9,15 @@ function DisplayList(props) {
     [checked, updateCheck] = useState(false);
 
   const { id } = useParams();
-  useEffect(async () => {
-    await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
-      updateTitle(res.data[0].name);
-      updateItems(JSON.parse(res.data[0].item));
+  const fetchList = async () => {
+    axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
+      console.log(res.data)
+      // updateTitle(res.data[0].name);
+      // updateItems(JSON.parse(res.data[0].item));
     })
-
+  }
+  useEffect(() => {
+    fetchList()
   }, []);
 
   const history = useHistory();

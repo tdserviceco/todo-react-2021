@@ -80,7 +80,7 @@ function CreateListLastStep(props) {
         items
       }
     }
-    axios.post('https://todo2021-db.herokuapp.com/api/item_list', data).then(res => {
+    axios.post('https://todo2021-db.herokuapp.com/api/items', data).then(res => {
       alert(`List saved!`)
     }).catch(error => console.error(error));
     updateItems([{ item: '' }])
@@ -88,7 +88,13 @@ function CreateListLastStep(props) {
     history.push(`/list/${lastestID}/${name}`)
   }
 
-  useEffect(async () => {
+  const getNameFromList = async () => {
+    return await axios.get('https://todo2021-db.herokuapp.com/api/list/' + lastestID).then(res => {
+      updateName(res.data[0].name)
+    }).catch(error => console.error(error));
+  }
+
+  useEffect(() => {
     // console.log("items-useEffect", items)
     if (items === 0) {
       updateItems([{ item: '' }]);
@@ -97,9 +103,7 @@ function CreateListLastStep(props) {
     else {
       updateDisabledButton(false)
     }
-    return await axios.get('https://todo2021-db.herokuapp.com/api/list/' + lastestID).then(res => {
-      updateName(res.data[0].name)
-    }).catch(error => console.error(error));;
+    getNameFromList()
   }, [items])
 
   return (
