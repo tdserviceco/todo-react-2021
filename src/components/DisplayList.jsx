@@ -10,7 +10,8 @@ function DisplayList(props) {
 
   const { id } = useParams();
   const fetchList = async () => {
-    await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
+    return await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
+      console.log(res.data)
       updateTitle(res.data[0].name);
       updateItems(JSON.parse(res.data[0].items));
     })
@@ -56,7 +57,7 @@ function DisplayList(props) {
     <>
       <Header />
       <div className="items">
-        <h1 className="title">{title}</h1>
+        <h1 className="title">{title ? title : "loading title"}</h1>
         {mapValues()}
         <button onClick={removeList} className="btn remove-list">Delete list</button>
       </div>
