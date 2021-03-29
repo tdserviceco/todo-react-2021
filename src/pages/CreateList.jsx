@@ -10,10 +10,10 @@ function CreateList(props) {
   return (
     <>
       <Header />
-      {location.pathname === '/dashboard/create/list' &&
+      {window.location.pathname === '/dashboard/create/list' &&
         <Step1 />
       }
-      {location.pathname === '/dashboard/create/list/step2' &&
+      {window.location.pathname === '/dashboard/create/list/step2' &&
         <Step2 />
       }
     </>
