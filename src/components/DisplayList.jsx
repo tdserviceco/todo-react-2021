@@ -5,26 +5,22 @@ import Header from './Header';
 function DisplayList(props) {
   const
     [items, updateItems] = useState([{}]),
-    [title, updateTitle] = useState(''),
     [checked, updateCheck] = useState(false);
 
-  const { id } = useParams();
+  const { id, title } = useParams();
   const fetchList = async () => {
     await axios.get(`https://todo2021-db.herokuapp.com/api/todoList/${id}`).then(res => {
-      setTimeout(() => {
-        updateTitle(res.data[0].name)
-        updateItems(res.data[0].items)
-      }, 100)
-    }
-    ).catch(error => console.log(error))
-  }
+      updateItems(JSON.parse(res.data[0].items))
+    }).catch(error => console.log(error))
 
+  }
+  const history = useHistory();
 
   useEffect(() => {
     fetchList()
   }, []);
 
-  const history = useHistory();
+
 
   // const controllCheck = (e) => {
   //   console.log(e.target.value)
@@ -39,10 +35,10 @@ function DisplayList(props) {
   // }
 
   const mapValues = () => {
-    return items.map((items, key) => {
+    return items.map((value, key) => {
       return (
         <div key={key} className="item-check">
-          <label className={checked ? 'check-line' : ''} htmlFor={`item-${key}`}>{items.item}</label>
+          <label className={checked ? 'check-line' : ''} htmlFor={`item-${key}`}>{value.item}</label>
           <input id={`item-${key}`} type="checkbox" /**onChange={controllCheck}*/ name="checkmark" />
         </div>
       )
@@ -53,7 +49,7 @@ function DisplayList(props) {
     let data = { data: { id: id } }
     axios.delete('https://todo2021-db.herokuapp.com/api/lists', data).then(
       alert("list deleted!")
-    )
+    ).catch(error => console.log(error))
     history.push('/');
   }
 
@@ -61,7 +57,7 @@ function DisplayList(props) {
     <>
       <Header />
       <div className="items">
-        <h1 className="title">{title ? title : "loading title"}</h1>
+        <h1 className="title">{title}</h1>
         {mapValues()}
         <button onClick={removeList} className="btn remove-list">Delete list</button>
       </div>

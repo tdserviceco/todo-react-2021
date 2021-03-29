@@ -72,7 +72,7 @@ function CreateListLastStep(props) {
     }
   }
 
-  const sendToDB = (e) => {
+  const sendToDB = async (e) => {
     e.preventDefault()
     let data = {
       listID: Number(lastestID),
@@ -80,7 +80,7 @@ function CreateListLastStep(props) {
         items
       }
     }
-    axios.post('http://localhost:5000/api/items', data).then(res => {
+    await axios.post('http://localhost:5000/api/items', data).then(res => {
       alert(`List saved!`)
     }).catch(error => console.error(error));
     updateItems([{ item: '' }])
@@ -89,7 +89,7 @@ function CreateListLastStep(props) {
   }
 
   const getNameFromList = async () => {
-    return await axios.get('https://todo2021-db.herokuapp.com/api/list/' + lastestID).then(res => {
+    await axios.get('https://todo2021-db.herokuapp.com/api/list/' + lastestID).then(res => {
       updateName(res.data[0].name)
     }).catch(error => console.error(error));
   }
