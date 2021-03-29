@@ -23,7 +23,7 @@ function Home(props) {
 
   const mapList = () => {
     if (lists.length === 0) {
-      return <h1>Table of ToDo lists is empty</h1>
+      return <h1>Table of lists is empty</h1>
     }
     else {
       return lists.map((index, key) => <Lists key={key} id={index.id} title={index.name} />)

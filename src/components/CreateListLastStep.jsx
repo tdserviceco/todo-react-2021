@@ -76,11 +76,11 @@ function CreateListLastStep(props) {
     e.preventDefault()
     let data = {
       listID: Number(lastestID),
-      item: {
+      items: {
         items
       }
     }
-    axios.post('https://todo2021-db.herokuapp.com/api/items', data).then(res => {
+    axios.post('http://localhost:5000/api/items', data).then(res => {
       alert(`List saved!`)
     }).catch(error => console.error(error));
     updateItems([{ item: '' }])
